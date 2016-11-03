@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+
+    <title>Signin Template for Bootstrap</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+         
+
+  </head>
+
+  <body>
+
+    <div class="container" id="contenedor">
+  
+      <form class="form-signin" >
+        <h2 class="form-signin-heading">Iniciar Sesción</h2>
+        <label for="inputEmail" class="sr-only">Usuario</label>
+        <input id="usuario" class="form-control" placeholder="Usuario" required autofocus >
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" id="password" class="form-control" placeholder="Contraseña"  required ><br>
+        <button class="btn btn-lg btn-primary btn-block" id="procesar">Ingresar</button>
+      </form><br>
+    <div class="alert alert-success" id="respuesta"></div>
+    </div> <!-- /container -->
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript">
+
+    $( document ).ready(function() { // hasta que la página este lista
+    $('#procesar').click(function(event){
+       event.preventDefault();
+       us= $('#usuario').val();
+       pw = SHA512($('#password').val());
+
+       $.ajax({
+       method: "POST",
+       url: "Ej1.php",
+       data: {usuario:us, clave:pw},
+       success:function(data)
+       {
+        $('#respuesta').html(data);
+                // Función adicional
+             
+        if(data==1)
+          {
+        setTimeout(function(){location.href='ini.php'}, 500); //Temporizador
+          }
+        else{
+        
+        }
+      
+       }
+    }); 
+    
+      });
+          
+    
+   });  
+    
+                    
+  </script>
+
+
+    
+    <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/sha512.js"></script>
+    
+  </body>
+</html>

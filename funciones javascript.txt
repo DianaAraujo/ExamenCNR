@@ -1,0 +1,54 @@
+<script type="text/javascript">
+
+    $( document ).ready(function() { // hasta que la página este lista
+    $('#procesar').click(function(event){
+       event.preventDefault();
+       us= $('#usuario').val();
+       pw = SHA512($('#password').val());
+
+       $.ajax({
+       method: "POST",
+       url: "Ej1.php",
+       data: {usuario:us, clave:pw},
+       success:function(data)
+       {
+        $('#respuesta').html(data);
+                // Función adicional
+             
+        if(data==1)
+          {
+        setTimeout(function(){location.href='ini.php'}, 500); //Temporizador
+          }
+        else{
+        
+        }
+      
+       }
+    }); 
+    
+      });
+          
+    
+   });  
+    
+                    
+  </script>
+
+<script type="text/javascript" >
+            function login()
+            {
+                var pwd = $('#txt').val();
+				var user = $('#txtUser').val();
+                hash= SHA512(pwd);                           
+                $.ajax({
+                    method:"POST",
+                    url:"login.php",
+                    data: {txtUser:user, txtPwd:hash},
+					success: function(data)
+					{
+						setTimeout(function(){location.href='ini.php'},3000)
+				
+					}
+                });
+            }
+        </script>
